@@ -18,15 +18,12 @@ attribution web     => ['http://und3f.com', 'und3f'],
             cpan    => ['UNDEF', 'und3f'];
 
 triggers startend => 'morse', 'morse code';
-
 zci answer_type => 'morse';
 zci is_cached   => 1;
-
 handle remainder => sub {
     my $input = shift;
-
     return unless $input;
-
+    return if($input eq 'cheat sheet');
     my $convertor = is_morse($input) ? \&as_ascii : \&as_morse;
     my $result = $convertor->($input);
 
@@ -37,5 +34,4 @@ handle remainder => sub {
         result    => html_enc($result),
       };
 };
-
 1;
